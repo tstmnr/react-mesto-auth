@@ -1,0 +1,12 @@
+.header {
+  width: 100%;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.header::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: hsl(0, 0%, 33%);
+  opacity: .7;
+}
