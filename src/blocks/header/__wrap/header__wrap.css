@@ -1,0 +1,13 @@
+.header__wrap {
+  display: flex;
+  margin-bottom: 37px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 567px) {
+  .header__wrap {
+    margin-bottom: 26px;
+    padding: 0 27px;
+  }
+}
