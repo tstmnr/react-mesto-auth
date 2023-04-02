@@ -15,6 +15,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup'
 import DeletePopup from './DeletePopup';
+import InfoTooltip from './InfoTooltip';
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setisInfoTooltipOpen] = React.useState(false);
+  const [isSuccessSignUp, setIsSuccessSignUp] = React.useState(false);
   const [cardForDelete, setCardForDelete] = React.useState({});
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
@@ -134,11 +137,16 @@ function App() {
     setIsDeletePopupOpen(true);
   }
 
+  function handleInfoTooltip() {
+    setisInfoTooltipOpen(true);
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsDeletePopupOpen(false);
+    setisInfoTooltipOpen(false);
     setSelectedCard({});
   }
 
@@ -146,10 +154,12 @@ function App() {
     e.preventDefault();
     auth.registration(data)
       .then((res) => {
-        navigate('/sign-in', {replace: true})
+        setIsSuccessSignUp(true);
+        handleInfoTooltip();
       })
       .catch(err => {
-        console.log(err)
+        setIsSuccessSignUp(false);
+        handleInfoTooltip();
       })
   }
 
@@ -176,21 +186,20 @@ function App() {
             <Route path="/sign-up" element={<Register onSubmit={registerUser}/>} />
             <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
             <Route path="/" element={loggedIn ? <ProtectedRouteElement element={
-              <>
-                <Main
-                  cards={cards}
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onEditAvatar={handleEditAvatarClick}
-                  onCardClick={handleCardClick}
-                  onCardLike={handleCardLike}
-                  onCardDelete={handleDeleteClick}
-                />
-                <Footer />
-              </>}
+              <Main
+                cards={cards}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleDeleteClick}
+              />
+              }
               loggedIn={loggedIn}/> : <Navigate to="/sign-in" replace />} />
-
           </Routes>
+
+          <Footer />
 
 
 
@@ -203,6 +212,8 @@ function App() {
           <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onSubmit={handleAddPlaceSubmit} />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+          <InfoTooltip isSuccess={isSuccessSignUp} isOpen={isInfoTooltipOpen} onClose={closeAllPopups} />
         </div>
       </div>
     </CurrentUserContext.Provider>
