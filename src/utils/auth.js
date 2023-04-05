@@ -20,10 +20,9 @@ class Auth {
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwt}`
+        ...this._headers,
+        Authorization: `Bearer ${jwt}`
       }
-
     })
   }
 

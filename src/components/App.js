@@ -56,7 +56,6 @@ function App() {
 
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
-    console.log(jwt)
     if (jwt) {
       auth.checkToken(jwt)
         .then((res) => {
@@ -190,7 +189,6 @@ function App() {
     e.preventDefault();
     auth.authentication(data)
       .then((res) => {
-        console.log(res);
         localStorage.setItem('jwt', res.token);
         setLoggedIn(true);
         navigate('/', {replace: true})
@@ -201,7 +199,8 @@ function App() {
   }
 
   function handleLogout() {
-    console.log('exit')
+    localStorage.removeItem('jwt')
+    setLoggedIn(false);
   }
 
   return (
