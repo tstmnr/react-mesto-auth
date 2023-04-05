@@ -8,10 +8,15 @@
 
 @import url("./blocks/header/header.css");
 @import url("./blocks/container/__header/container__header.css");
+@import url("./blocks/header/__wrapper/header__wrapper.css");
+@import url("./blocks/header/__line/header__line.css");
 @import url("./blocks/logo/logo.css");
-@import url("./blocks/header/__wrap/header__wrap.css");
 @import url("./blocks/header/__logo/header__logo.css");
+@import url("./blocks/header/__info/header__info.css");
 @import url("./blocks/header/__register-link/header__register-link.css");
+@import url("./blocks/header/__email/header__email.css");
+@import url("./blocks/header/__sign-out/header__sign-out.css");
+
 
 @import url("./blocks/content/content.css");
 @import url("./blocks/container/__content/container__content.css");

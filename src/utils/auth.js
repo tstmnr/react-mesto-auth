@@ -16,6 +16,17 @@ class Auth {
     return fetch(url, options).then(this._checkResponse)
   }
 
+  checkToken(jwt) {
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwt}`
+      }
+
+    })
+  }
+
   authentication(data) {
     return this._request(`${this._baseUrl}/signin`, {
       method: 'POST',
