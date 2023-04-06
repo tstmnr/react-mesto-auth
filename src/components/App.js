@@ -194,6 +194,7 @@ function App() {
         navigate('/', {replace: true})
       })
       .catch(err => {
+        setIsSuccessSignUp(false);
         handleInfoTooltip();
       })
   }
